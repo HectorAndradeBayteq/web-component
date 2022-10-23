@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { delay, map, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class DiagnosticService {
 
   constructor(private http: HttpClient) { }
 
-  public getDiagnostics(chartacters: string): Observable<any[]> {
+  public getDiagnostics(url: string, chartacters: string): Observable<any[]> {
 
     let terms = [
       "Estrongiloidiasis",
@@ -23,14 +23,21 @@ export class DiagnosticService {
       "Tricoestrongiliasis",
       "Estrongiloidiasis, no especificada"
     ];
-    let fileredTerms = terms.filter(term => term.includes(chartacters));
-    return of(fileredTerms.map(term => { return { id: Math.random()*100, name: term }}));
+    // HAN - Retirar comentarios para simular una consulta a un servicio 
+    //return of(terms).pipe(delay(1000));
+    const httpOptions = {
+      headers: new HttpHeaders(
+        // {
+        //   'Content-Type':  'application/json'
+        // }
+      )
+    };
 
-    // return this.http.post('https://dev3.bayteq.com:60277/api/fuzzy/diagnostics',
-    // {
-    //   "input": "string",
-    //   "limit": 0,
-    //   "cutOff": 0
-    // });
+    return this.http.post(url,
+    {
+      "input": chartacters,
+      "limit": 0,
+      "cutOff": 0
+    }, httpOptions) as Observable<any[]>;
  }
 }

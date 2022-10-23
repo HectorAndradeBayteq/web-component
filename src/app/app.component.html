@@ -2,6 +2,8 @@
 [data]="diagnostics"
 [searchKeyword]="keyword"
 placeholder="Diagnóstico"
+[customFilter]="customFilter"
+[isLoading]="isLoading"
 (selected)='selectEvent($event)'
 (inputChanged)='onChangeSearch($event)'
 (inputFocused)='onFocused($event)'
@@ -14,6 +16,6 @@ historyIdentifier="diagnostics"
   <a [innerHTML]="item.name"></a>
 </ng-template>
 
-<ng-template #notFoundTemplate let-notFound>
-  <div [innerHTML]="notFound"></div>
+<ng-template #notFoundTemplate>
+  <div>{{this.notFound}}</div>
 </ng-template>

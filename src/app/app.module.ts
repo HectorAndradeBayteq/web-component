@@ -16,7 +16,11 @@ import { AppComponent } from './app.component';
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  // HAN: 
+  // Comentar esta línea para generar el "dist", quitar los comentarios para desarrollo.
+  // Generar dist: ng build --output-hashing none --single-bundle true
+  // Usar solo el main para integraciones.
+  //bootstrap: [AppComponent],
   entryComponents: [
     AppComponent
   ]
@@ -26,6 +30,6 @@ export class AppModule implements DoBootstrap {
 
   ngDoBootstrap(): void {
       const element = createCustomElement(AppComponent, {injector: this.injector});
-      customElements.define('input-diagnostics', element)
+      customElements.define('input-diagnostics', element);
   }
 }
