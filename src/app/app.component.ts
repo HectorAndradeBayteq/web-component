@@ -20,7 +20,7 @@ export class AppComponent {
   constructor(private diagnosticService: DiagnosticService){}
 
   selectEvent(item:string) {
-    alert(item);
+    //alert(item);
   }
 
   onChangeSearch(search: string) {
@@ -37,7 +37,7 @@ export class AppComponent {
 
   triggerSearch(){
     if(this.lastKeyPressTimer)clearTimeout(this.lastKeyPressTimer);
-    this.lastKeyPressTimer = setTimeout(() => {this.search();},1000);
+    this.lastKeyPressTimer = setTimeout(() => {this.search();},300);
   }
 
   search(){
